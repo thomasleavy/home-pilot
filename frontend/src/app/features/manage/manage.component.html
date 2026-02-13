@@ -1,0 +1,102 @@
+<div class="manage-page">
+  <h1 class="page-title">Manage</h1>
+  <p class="page-intro">Settings and account.</p>
+
+  @if (deleteAccountError) {
+    <div class="error-banner" role="alert">{{ deleteAccountError }}</div>
+  }
+
+  <section class="settings-section">
+    <div class="settings-card">
+      @for (option of settingsOptions; track option) {
+        <button
+          type="button"
+          class="settings-row"
+          (click)="onSettingsOptionClick(option)"
+        >
+          <span class="settings-label">{{ option }}</span>
+          <span class="settings-chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </span>
+        </button>
+      }
+      <button type="button" class="btn-add-device" (click)="onAddDevice()">
+        + Add a device
+      </button>
+    </div>
+  </section>
+
+  <section class="account-section">
+    <h2 class="section-title">Account</h2>
+    <div class="account-card">
+      @for (option of accountOptions; track option.label) {
+        <button
+          type="button"
+          class="account-row"
+          [class.destructive]="option.destructive"
+          (click)="onAccountOptionClick(option)"
+        >
+          <span class="account-label">{{ option.label }}</span>
+          <span class="account-chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </span>
+        </button>
+      }
+    </div>
+  </section>
+
+  <section class="support-section">
+    <h2 class="section-title">Support</h2>
+    <div class="support-card">
+      @for (option of supportOptions; track option) {
+        <button
+          type="button"
+          class="support-row"
+          (click)="onSupportOptionClick(option)"
+        >
+          <span class="support-label">{{ option }}</span>
+          <span class="support-chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </span>
+        </button>
+      }
+    </div>
+  </section>
+
+  <button type="button" class="logout-btn" (click)="onLogout()">Log out</button>
+
+  <a routerLink="/home" class="back-link">← Back to Home</a>
+</div>
+
+@if (showDeleteConfirm) {
+  <div
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="delete-account-title"
+    (click)="closeDeleteConfirm()"
+  >
+    <div class="modal-dialog" (click)="$event.stopPropagation()">
+      <h2 id="delete-account-title" class="modal-title">Delete account</h2>
+      <p class="modal-message">{{ deleteAccountConfirmMessage }}</p>
+      <div class="modal-actions">
+        <button
+          type="button"
+          class="modal-btn modal-btn-cancel"
+          [disabled]="deleteAccountLoading"
+          (click)="closeDeleteConfirm()"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="modal-btn modal-btn-delete"
+          [disabled]="deleteAccountLoading"
+          (click)="confirmDeleteAccount()"
+        >
+          {{ deleteAccountLoading ? 'Deleting…' : 'Delete account' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,349 @@
+.manage-page {
+  padding: 1.5rem 1.25rem 5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.page-intro {
+  color: var(--text-secondary);
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.error-banner {
+  background: var(--error-bg);
+  color: var(--error-red);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+}
+
+/* Settings container */
+.settings-section {
+  margin-bottom: 2rem;
+}
+
+.settings-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.settings-row:hover {
+  background: var(--bg-content);
+}
+
+.settings-row:last-of-type {
+  border-bottom: none;
+}
+
+.settings-label {
+  font-weight: 500;
+}
+
+.settings-chevron {
+  display: flex;
+  color: var(--text-secondary);
+}
+
+.settings-chevron svg {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-add-device {
+  display: block;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--accent-blue);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-add-device:hover {
+  background: var(--accent-blue-soft);
+}
+
+/* Account container */
+.account-section {
+  margin-bottom: 2rem;
+}
+
+.account-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.account-row:hover {
+  background: var(--bg-content);
+}
+
+.account-row:last-child {
+  border-bottom: none;
+}
+
+.account-row.destructive .account-label {
+  color: var(--error-red);
+}
+
+.account-row.destructive:hover {
+  background: var(--error-bg);
+}
+
+.account-label {
+  font-weight: 500;
+}
+
+.account-chevron {
+  display: flex;
+  color: var(--text-secondary);
+}
+
+.account-row.destructive .account-chevron {
+  color: var(--error-red);
+}
+
+.account-chevron svg {
+  width: 20px;
+  height: 20px;
+}
+
+.logout-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #b91c1c;
+}
+
+/* Support container */
+.support-section {
+  margin-bottom: 2rem;
+}
+
+.support-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.support-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.support-row:hover {
+  background: var(--bg-content);
+}
+
+.support-row:last-child {
+  border-bottom: none;
+}
+
+.support-label {
+  font-weight: 500;
+}
+
+.support-chevron {
+  display: flex;
+  color: var(--text-secondary);
+}
+
+.support-chevron svg {
+  width: 20px;
+  height: 20px;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* In-app delete account confirmation modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.25rem;
+  animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-dialog {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow), 0 20px 40px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem 1.25rem;
+  max-width: 400px;
+  width: 100%;
+  animation: modalSlideIn 0.25s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--text-primary);
+}
+
+.modal-message {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+  border: none;
+}
+
+.modal-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.modal-btn-cancel {
+  background: var(--bg-content);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.modal-btn-cancel:hover:not(:disabled) {
+  background: var(--border);
+}
+
+.modal-btn-delete {
+  background: var(--error-red);
+  color: #fff;
+}
+
+.modal-btn-delete:hover:not(:disabled) {
+  background: #b91c1c;
+  filter: brightness(1.05);
+}

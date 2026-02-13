@@ -1,0 +1,146 @@
+<main class="content">
+    @if (error) {
+      <div class="error-banner">
+        {{ error }}
+      </div>
+    }
+
+    @if (loading && !error) {
+      <p class="loading">Loading devices…</p>
+    }
+
+    @if (!loading && !error) {
+      @if (alerts.length) {
+        <section class="alerts-section">
+          <h2 class="section-title">Alerts</h2>
+          <ul class="alert-list">
+            @for (a of alerts.slice(0, 5); track a.timestamp + a.deviceId) {
+              <li class="alert-item">
+                <span class="alert-time">{{ a.timestamp | date:'shortTime' }}</span>
+                <span class="alert-message">{{ a.message }}</span>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+
+      <section class="devices-section">
+        <h2 class="section-title">Devices</h2>
+        <div class="device-list">
+          @for (device of devices; track device.deviceId) {
+            <article class="device-card" [class]="'device-' + device.type">
+              <div class="card-main">
+                <div class="card-left">
+                  <span class="device-icon" [attr.aria-hidden]="true">
+                    @switch (device.type) {
+                      @case ('light') { <span class="icon-symbol">💡</span> }
+                      @case ('thermostat') { <span class="icon-symbol icon-thermostat">🌡</span> }
+                      @case ('motion') { <span class="icon-symbol">👁</span> }
+                      @case ('hot-water') {
+                        <span class="icon-symbol icon-tap" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20V9a4 4 0 0 1 8 0v11"/><path d="M4 16h16"/><path d="M6 12h12"/></svg>
+                        </span>
+                      }
+                      @default { <span class="icon-symbol">▢</span> }
+                    }
+                  </span>
+                  <div class="device-info">
+                    <h3 class="device-name">{{ device.name }}</h3>
+                    @switch (device.type) {
+                      @case ('light') {
+                        <span class="device-value">{{ getLightOn(device) ? 'On' : 'Off' }}</span>
+                      }
+                      @case ('thermostat') {
+                        <span class="device-value">{{ getThermostatTemp(device) }}{{ preferredUnit === 'F' ? '°F' : '°C' }}</span>
+                        <span class="device-meta">Heating to {{ getThermostatSetpoint(device) }}{{ preferredUnit === 'F' ? '°F' : '°C' }}</span>
+                        <span class="device-meta heating-status">{{ getThermostatHeatingOn(device) ? 'Heating on' : 'Heating off' }}</span>
+                      }
+                      @case ('motion') {
+                        <span class="device-meta">Last motion {{ getMotionTime(device) }}</span>
+                      }
+                      @case ('hot-water') {
+                        <span class="device-value">{{ getLightOn(device) ? 'On' : 'Off' }}</span>
+                      }
+                      @default {
+                        <span class="device-value">{{ device.state | json }}</span>
+                      }
+                    }
+                  </div>
+                </div>
+                <div class="card-right">
+                  @switch (device.type) {
+                    @case ('light') {
+                      <button
+                        type="button"
+                        class="btn-toggle"
+                        [class.on]="getLightOn(device)"
+                        (click)="toggleLight(device.deviceId, getLightOn(device))"
+                      >
+                        {{ getLightOn(device) ? 'On' : 'Off' }}
+                      </button>
+                    }
+                    @case ('thermostat') {
+                      <div class="thermostat-controls">
+                        <button
+                          type="button"
+                          class="btn-toggle heating-toggle"
+                          [class.on]="getThermostatHeatingOn(device)"
+                          (click)="setThermostatHeating(device.deviceId, !getThermostatHeatingOn(device))"
+                        >
+                          {{ getThermostatHeatingOn(device) ? 'On' : 'Off' }}
+                        </button>
+                        <button type="button" class="btn-boost" (click)="stepThermostatSetpoint(device.deviceId, device, -1)">−</button>
+                        <button type="button" class="btn-boost" (click)="stepThermostatSetpoint(device.deviceId, device, 1)">+</button>
+                      </div>
+                    }
+                    @case ('hot-water') {
+                      <button
+                        type="button"
+                        class="btn-toggle"
+                        [class.on]="getLightOn(device)"
+                        (click)="toggleHotWater(device.deviceId, getLightOn(device))"
+                      >
+                        {{ getLightOn(device) ? 'On' : 'Off' }}
+                      </button>
+                    }
+                    @default {}
+                  }
+                </div>
+              </div>
+              <div class="card-footer">
+                <span class="connection-status" [class.poor]="connectionStatus === 'poor' || connectionStatus === 'disconnected'">
+                  @if (connectionStatus === 'connected') {
+                    <span class="status-dot status-ok"></span> Connected
+                  } @else if (connectionStatus === 'poor' || connectionStatus === 'disconnected') {
+                    <span class="status-dot status-poor"></span> Poor connection
+                  } @else {
+                    <span class="status-dot status-connecting"></span> {{ connectionLabel() }}
+                  }
+                </span>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+
+    <!-- Support and App sections always visible on home -->
+    <section class="support-section">
+      <h2 class="section-title">Support</h2>
+      <ul class="options-list">
+        <li><a routerLink="/ask-ai" class="option-link option-link-nav">Ask</a></li>
+        <li><a routerLink="/faq" class="option-link option-link-nav">FAQ</a></li>
+        <li><a routerLink="/guide" class="option-link option-link-nav">Guide</a></li>
+      </ul>
+    </section>
+
+    <section class="app-section">
+      <h2 class="section-title">App</h2>
+      <ul class="options-list">
+        <li><a routerLink="/text-size" class="option-link option-link-nav">Text size</a></li>
+        <li><a routerLink="/about" class="option-link option-link-nav">About</a></li>
+      </ul>
+    </section>
+
+    <button type="button" class="logout-btn" (click)="onLogout()">Log out</button>
+  </main>

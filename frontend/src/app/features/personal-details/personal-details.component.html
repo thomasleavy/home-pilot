@@ -1,0 +1,71 @@
+<div class="personal-details-page">
+  <h1 class="page-title">Personal details</h1>
+  <p class="page-intro">Your account information. This is unique to your profile.</p>
+
+  @if (loading) {
+    <p class="loading">Loading…</p>
+  } @else {
+    @if (profileError) {
+      <div class="error-banner" role="alert">{{ profileError }}</div>
+    }
+
+    <section class="details-card" aria-labelledby="profile-heading">
+      <h2 id="profile-heading" class="section-heading">Profile</h2>
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <label class="label" for="username">Username</label>
+        <p id="username" class="readonly-value">{{ profile?.username ?? '—' }}</p>
+        <p class="readonly-description">Your username cannot be changed.</p>
+        <label class="label" for="email">Email</label>
+        <input id="email" type="email" formControlName="email" class="input" placeholder="Email" autocomplete="email" />
+        @if (profileForm.get('email')?.invalid && profileForm.get('email')?.touched) {
+          <span class="hint">Valid email required</span>
+        }
+        <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || profileForm.pristine">Save changes</button>
+        @if (profileSaved) {
+          <p class="save-hint">Profile updated.</p>
+        }
+      </form>
+    </section>
+
+    <section class="details-card" aria-labelledby="account-id-heading">
+      <h2 id="account-id-heading" class="section-heading">Account ID</h2>
+      <p class="readonly-value">{{ profile?.id ?? '—' }}</p>
+      <p class="readonly-description">Your unique account identifier. Used to link your devices and data to your profile.</p>
+    </section>
+
+    <section class="details-card" aria-labelledby="password-heading">
+      <h2 id="password-heading" class="section-heading">Password</h2>
+      <p class="password-masked">{{ passwordPlaceholder }}</p>
+      <p class="readonly-description">Your password is stored securely and never shown. Use the button below to change it.</p>
+      @if (!showPasswordForm) {
+        <button type="button" class="btn btn-secondary" (click)="togglePasswordForm()">Change password</button>
+      } @else {
+        <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" class="password-form">
+          <label class="label" for="currentPassword">Current password</label>
+          <input id="currentPassword" type="password" formControlName="currentPassword" class="input" placeholder="Current password" autocomplete="current-password" />
+          <label class="label" for="newPassword">New password</label>
+          <input id="newPassword" type="password" formControlName="newPassword" class="input" placeholder="New password (min 6 characters)" autocomplete="new-password" />
+          @if (passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched) {
+            <span class="hint">At least 6 characters</span>
+          }
+          <label class="label" for="confirmPassword">Confirm new password</label>
+          <input id="confirmPassword" type="password" formControlName="confirmPassword" class="input" placeholder="Confirm new password" autocomplete="new-password" />
+          @if (passwordError) {
+            <p class="hint" role="alert">{{ passwordError }}</p>
+          }
+          @if (passwordSuccess) {
+            <p class="save-hint">Password changed.</p>
+          }
+          <div class="password-actions">
+            <button type="button" class="btn btn-link" (click)="togglePasswordForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="passwordForm.invalid || passwordLoading">
+              {{ passwordLoading ? 'Updating…' : 'Update password' }}
+            </button>
+          </div>
+        </form>
+      }
+    </section>
+
+    <a routerLink="/manage" class="back-link">← Back to Manage</a>
+  }
+</div>

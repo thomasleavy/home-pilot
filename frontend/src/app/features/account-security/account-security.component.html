@@ -1,0 +1,52 @@
+<div class="account-security-page">
+  <h1 class="page-title">Account Security</h1>
+  <p class="page-intro">Reset your password. This applies only to your account.</p>
+
+  <section class="security-card" aria-labelledby="password-heading">
+    <h2 id="password-heading" class="section-heading">Change password</h2>
+    <p class="section-intro">Enter your current password, then choose a new one. Your new password must be at least 6 characters.</p>
+    <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+      <label class="label" for="currentPassword">Current password</label>
+      <input
+        id="currentPassword"
+        type="password"
+        formControlName="currentPassword"
+        class="input"
+        placeholder="Current password"
+        autocomplete="current-password"
+      />
+      <label class="label" for="newPassword">New password</label>
+      <input
+        id="newPassword"
+        type="password"
+        formControlName="newPassword"
+        class="input"
+        placeholder="New password (min 6 characters)"
+        autocomplete="new-password"
+      />
+      @if (passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched) {
+        <span class="hint">At least 6 characters</span>
+      }
+      <label class="label" for="confirmPassword">Confirm new password</label>
+      <input
+        id="confirmPassword"
+        type="password"
+        formControlName="confirmPassword"
+        class="input"
+        placeholder="Confirm new password"
+        autocomplete="new-password"
+      />
+      @if (error) {
+        <p class="hint" role="alert">{{ error }}</p>
+      }
+      @if (success) {
+        <p class="save-hint">Password changed. Use your new password next time you log in.</p>
+      }
+      <button type="submit" class="btn btn-primary" [disabled]="passwordForm.invalid || loading">
+        {{ loading ? 'Updating…' : 'Update password' }}
+      </button>
+    </form>
+  </section>
+
+  <a routerLink="/manage" class="back-link">← Back to Manage</a>
+</div>

@@ -1,0 +1,62 @@
+<div class="discover-page">
+  <h1 class="page-title">Discover</h1>
+  <p class="page-intro">Explore more products from our range.</p>
+
+  <section class="carousel-section" aria-label="Featured carousel">
+    <h2 class="section-title">Featured</h2>
+    <div class="carousel">
+      <button type="button" class="carousel-btn carousel-btn-prev" aria-label="Previous slide" (click)="prevSlide()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="carousel-track">
+        @for (slide of carouselSlides; track slide) {
+          <div
+            class="carousel-slide"
+            [class.active]="carouselIndex === slide"
+            [attr.aria-hidden]="carouselIndex !== slide"
+          >
+            <div class="carousel-placeholder">
+              <span class="placeholder-label">Slide {{ slide + 1 }}</span>
+              <span class="placeholder-hint">Add image</span>
+            </div>
+          </div>
+        }
+      </div>
+      <button type="button" class="carousel-btn carousel-btn-next" aria-label="Next slide" (click)="nextSlide()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="carousel-dots" role="tablist" aria-label="Carousel slides">
+      @for (slide of carouselSlides; track slide) {
+        <button
+          type="button"
+          class="carousel-dot"
+          [class.active]="carouselIndex === slide"
+          [attr.aria-selected]="carouselIndex === slide"
+          [attr.aria-label]="'Slide ' + (slide + 1)"
+          (click)="goToSlide(slide)"
+        ></button>
+      }
+    </div>
+  </section>
+
+  <section class="mosaic-section" aria-label="Products mosaic">
+    <h2 class="section-title">Products</h2>
+    <div class="mosaic">
+      @for (item of mosaicItems; track item) {
+        <button
+          type="button"
+          class="mosaic-tile"
+          (click)="onMosaicItemClick(item)"
+        >
+          <span class="mosaic-placeholder">
+            <span class="placeholder-label">Product {{ item }}</span>
+            <span class="placeholder-hint">Add image</span>
+          </span>
+        </button>
+      }
+    </div>
+  </section>
+
+  <a routerLink="/home" class="back-link">← Back to Home</a>
+</div>

@@ -1,0 +1,66 @@
+<div class="insights-page">
+  <h1 class="page-title">Insights</h1>
+  <p class="page-intro">Cumulative time on for the past 7 days.</p>
+
+  @if (error) {
+    <div class="error-banner">{{ error }}</div>
+  }
+
+  @if (loading && !heatingHistory.length && !hotWaterHistory.length) {
+    <p class="loading">Loading…</p>
+  }
+
+  @if (!loading) {
+    <section class="chart-section">
+      <h2 class="chart-title">Heating history</h2>
+      @if (heatingHistory.length) {
+        <div class="chart-container">
+          <div class="chart-bars">
+            @for (day of heatingHistory; track day.date) {
+              <div class="bar-wrapper">
+                <div
+                  class="bar bar-heating"
+                  [style.height.%]="heatingBarHeight(day.minutesOn)"
+                  [title]="formatDuration(day.minutesOn)"
+                ></div>
+                <span class="bar-value">{{ formatDuration(day.minutesOn) }}</span>
+              </div>
+            }
+          </div>
+          <div class="chart-labels">
+            @for (day of heatingHistory; track day.date) {
+              <span class="bar-label">{{ formatDate(day.date) }}</span>
+            }
+          </div>
+        </div>
+      }
+    </section>
+
+    <section class="chart-section">
+      <h2 class="chart-title">Hot water history</h2>
+      @if (hotWaterHistory.length) {
+        <div class="chart-container">
+          <div class="chart-bars">
+            @for (day of hotWaterHistory; track day.date) {
+              <div class="bar-wrapper">
+                <div
+                  class="bar bar-hot-water"
+                  [style.height.%]="hotWaterBarHeight(day.minutesOn)"
+                  [title]="formatDuration(day.minutesOn)"
+                ></div>
+                <span class="bar-value">{{ formatDuration(day.minutesOn) }}</span>
+              </div>
+            }
+          </div>
+          <div class="chart-labels">
+            @for (day of hotWaterHistory; track day.date) {
+              <span class="bar-label">{{ formatDate(day.date) }}</span>
+            }
+          </div>
+        </div>
+      }
+    </section>
+  }
+
+  <a routerLink="/home" class="back-link">← Back to Home</a>
+</div>

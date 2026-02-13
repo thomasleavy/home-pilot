@@ -1,0 +1,87 @@
+.guide-page {
+  padding: 1.5rem 1.25rem 5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.page-intro {
+  color: var(--text-secondary);
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.guide-section {
+  margin-bottom: 1.5rem;
+}
+
+.guide-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.guide-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: var(--accent-orange);
+}
+
+.guide-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.guide-icon-tap {
+  color: var(--accent-blue);
+}
+
+.guide-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.25rem;
+}
+
+.guide-text {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.55;
+  margin: 0 0 0.75rem;
+}
+
+.guide-text:last-child {
+  margin-bottom: 0;
+}
+
+.guide-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

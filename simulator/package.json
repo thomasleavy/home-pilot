@@ -1,0 +1,13 @@
+{
+  "name": "mqtt-device-pilot-simulator",
+  "version": "1.0.0",
+  "description": "Simulated MQTT devices (light, thermostat, motion sensor)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "mqtt": "^5.3.0"
+  }
+}

@@ -1,0 +1,31 @@
+<div class="text-size-page">
+  <h1 class="page-title">Text size</h1>
+  <p class="page-intro">Choose a size that works for you. This applies across the entire app.</p>
+  <div class="options">
+    <button
+      type="button"
+      class="size-option"
+      [class.active]="textSizeService.size() === 'small'"
+      (click)="setSize('small')"
+    >
+      Small text
+    </button>
+    <button
+      type="button"
+      class="size-option"
+      [class.active]="textSizeService.size() === 'medium'"
+      (click)="setSize('medium')"
+    >
+      Medium text
+    </button>
+    <button
+      type="button"
+      class="size-option"
+      [class.active]="textSizeService.size() === 'large'"
+      (click)="setSize('large')"
+    >
+      Large text
+    </button>
+  </div>
+  <a routerLink="/home" class="back-link">← Back to Home</a>
+</div>

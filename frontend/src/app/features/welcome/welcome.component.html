@@ -1,0 +1,81 @@
+<div class="welcome-page">
+  <section class="welcome-video-section" aria-hidden="true">
+    <video class="welcome-video" autoplay muted loop playsinline>
+      <source src="/videos/welcome-bg.mp4" type="video/mp4" />
+      <source [src]="welcomeVideoBackupUrl" type="video/mp4" />
+    </video>
+    <div class="welcome-video-overlay"></div>
+    <div class="welcome-hero-container">
+      <div class="welcome-hero-card">
+        <h1 class="app-name">Home Pilot</h1>
+        <p class="app-tagline">Your smart home, one place.</p>
+        <p class="app-blurb">
+          Control heating, hot water, lights and see insights—all from your phone.
+          Create an account to get started and keep your settings saved across devices.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="welcome-theme-toggle" role="group" aria-label="Theme">
+    <button
+      type="button"
+      class="theme-option"
+      [class.active]="!themeService.isDark()"
+      (click)="themeService.setTheme('light')"
+      aria-pressed="!themeService.isDark()"
+      aria-label="Light mode"
+    >
+      <span aria-hidden="true">☀</span>
+    </button>
+    <button
+      type="button"
+      class="theme-option"
+      [class.active]="themeService.isDark()"
+      (click)="themeService.setTheme('dark')"
+      [attr.aria-pressed]="themeService.isDark()"
+      aria-label="Dark mode"
+    >
+      <span aria-hidden="true">☽</span>
+    </button>
+  </div>
+
+  <div class="welcome-content">
+    @if (error) {
+      <div class="error-banner" role="alert">{{ error }}</div>
+    }
+
+    @if (showRegister) {
+    <form class="auth-form" (ngSubmit)="onRegister()" [formGroup]="registerForm">
+      <h2 class="form-title">Create account</h2>
+      <label class="label">Username</label>
+      <input type="text" formControlName="username" class="input" placeholder="Username" autocomplete="username" />
+      @if (registerForm.get('username')?.invalid && registerForm.get('username')?.touched) {
+        <span class="hint">At least 2 characters</span>
+      }
+      <label class="label">Email</label>
+      <input type="email" formControlName="email" class="input" placeholder="Email" autocomplete="email" />
+      @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+        <span class="hint">Valid email required</span>
+      }
+      <label class="label">Password</label>
+      <input type="password" formControlName="password" class="input" placeholder="Password (min 6 characters)" autocomplete="new-password" />
+      @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+        <span class="hint">At least 6 characters</span>
+      }
+      <button type="submit" class="btn btn-primary" [disabled]="loading">Register</button>
+      <button type="button" class="btn btn-link" (click)="toggleMode()">Already have an account? Log in</button>
+    </form>
+  } @else {
+    <form class="auth-form" (ngSubmit)="onLogin()" [formGroup]="loginForm">
+      <h2 class="form-title">Log in</h2>
+      <label class="label">Username or email</label>
+      <input type="text" formControlName="login" class="input" placeholder="Username or email" autocomplete="username" />
+      <label class="label">Password</label>
+      <input type="password" formControlName="password" class="input" placeholder="Password" autocomplete="current-password" />
+      <button type="submit" class="btn btn-primary" [disabled]="loading">Log in</button>
+      <button type="button" class="btn btn-link" (click)="toggleMode()">Need an account? Register</button>
+    </form>
+  }
+  </div>
+</div>

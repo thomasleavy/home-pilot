@@ -1,0 +1,118 @@
+.insights-page {
+  padding: 1.5rem 1.25rem 5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.page-intro {
+  color: var(--text-secondary);
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.error-banner {
+  background: var(--error-bg);
+  color: var(--error-red);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.loading {
+  color: var(--text-secondary);
+  margin: 1rem 0;
+}
+
+.chart-section {
+  margin-bottom: 1.5rem;
+}
+
+.chart-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+}
+
+.chart-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.chart-bars,
+.chart-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.chart-bars {
+  height: 140px;
+  align-items: flex-end;
+  margin-bottom: 0.5rem;
+  overflow: hidden; /* bars never extend beyond container */
+}
+
+.bar-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  height: 100%; /* bar height % is relative to this (0–24 hr scale) */
+  overflow: hidden;
+}
+
+.bar {
+  width: 100%;
+  max-width: 36px;
+  min-height: 4px;
+  max-height: 100%; /* cap at container */
+  border-radius: 6px 6px 0 0;
+  transition: height 0.3s ease;
+  flex-shrink: 0;
+}
+
+.bar-heating {
+  background: var(--accent-orange);
+}
+
+.bar-hot-water {
+  background: var(--accent-blue);
+}
+
+.bar-value {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.bar-label {
+  flex: 1;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-align: center;
+  min-width: 0;
+}
+
+.back-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

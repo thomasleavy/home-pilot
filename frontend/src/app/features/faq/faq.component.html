@@ -1,0 +1,15 @@
+<div class="faq-page">
+  <h1 class="page-title">Frequently asked questions</h1>
+  <p class="page-intro">Answers about Home Pilot and smart home systems like it.</p>
+
+  <section class="faq-list" aria-label="FAQ">
+    @for (item of faqs; track item.question) {
+      <article class="faq-item">
+        <h2 class="faq-question">{{ item.question }}</h2>
+        <p class="faq-answer">{{ item.answer }}</p>
+      </article>
+    }
+  </section>
+
+  <a routerLink="/manage" class="back-link">← Back to Manage</a>
+</div>

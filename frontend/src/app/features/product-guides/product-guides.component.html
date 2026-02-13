@@ -1,0 +1,20 @@
+<div class="product-guides-page">
+  <h1 class="page-title">Product Guides</h1>
+  <p class="page-intro">Guides and information for devices you can use with Home Pilot.</p>
+
+  <div class="wip-banner" role="status">
+    <span class="wip-label">Work in progress</span>
+    <p class="wip-text">{{ wipMessage }}</p>
+  </div>
+
+  <section class="products-section" aria-label="Placeholder products">
+    @for (product of placeholderProducts; track product.name) {
+      <article class="product-card">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-description">{{ product.description }}</p>
+      </article>
+    }
+  </section>
+
+  <a routerLink="/manage" class="back-link">← Back to Manage</a>
+</div>

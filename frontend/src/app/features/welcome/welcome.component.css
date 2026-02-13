@@ -1,0 +1,246 @@
+.welcome-page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Full-bleed background video section */
+.welcome-video-section {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.welcome-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.welcome-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+/* Hero in upper half only so form below never overlaps it */
+.welcome-hero-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  pointer-events: none;
+}
+
+/* Same theming as login/register container (var(--bg-card), etc.) */
+.welcome-hero-card {
+  max-width: 420px;
+  padding: 1.75rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  pointer-events: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.welcome-hero-card .app-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.welcome-hero-card .app-tagline {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem;
+}
+
+.welcome-hero-card .app-blurb {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Theme toggle: top-right over video */
+.welcome-theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+html.theme-dark .welcome-theme-toggle {
+  background: rgba(30, 41, 59, 0.95);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-theme-toggle .theme-option {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.welcome-theme-toggle .theme-option:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-primary);
+}
+
+html.theme-dark .welcome-theme-toggle .theme-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.welcome-theme-toggle .theme-option.active {
+  background: var(--accent-blue-soft);
+  color: var(--accent-blue);
+}
+
+/* Form content: sits in lower half, never overlaps hero */
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.5rem 1.25rem 2rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+  /* No background so video shows through; form card provides its own background */
+}
+
+.welcome-content .error-banner {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+}
+
+.welcome-content .auth-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.error-banner {
+  background: var(--error-bg);
+  color: var(--error-red);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.auth-form {
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--bg-content);
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+.hint {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--error-red);
+  margin-bottom: 0.5rem;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.btn-primary {
+  background: var(--accent-blue);
+  color: #fff;
+  margin-top: 1rem;
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-link {
+  background: transparent;
+  color: var(--accent-blue);
+  font-weight: 500;
+  margin-top: 0.75rem;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
