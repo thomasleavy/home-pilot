@@ -1,12 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { ThemeService } from '../../core/services/theme.service';
 
-/** Local video: put a file at public/videos/welcome-bg.mp4. Backup URL used when local file is not present (e.g. on GitHub). */
-const WELCOME_VIDEO_BACKUP_URL = 'https://videos.pexels.com/video-files/6962711/6962711-hd_1920_1080_25fps.mp4';
+/** Pexels video (ID 6962711). If it does not play (e.g. CORS from localhost), fallback is used. */
+const WELCOME_VIDEO_PEXELS = 'https://videos.pexels.com/video-files/6962711/6962711-hd_1920_1080_25fps.mp4';
+/** Fallback when Pexels is blocked; replace with your own URL or local path if needed. */
+const WELCOME_VIDEO_FALLBACK = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
 /** Pexels video ID 6962711 – credit link for the welcome background video. */
 const PEXELS_VIDEO_PAGE_URL = 'https://www.pexels.com/video/6962711/';
 
@@ -17,18 +19,51 @@ const PEXELS_VIDEO_PAGE_URL = 'https://www.pexels.com/video/6962711/';
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })
-export class WelcomeComponent {
+export class WelcomeComponent implements AfterViewInit {
+  @ViewChild('welcomeVideo') videoRef?: ElementRef<HTMLVideoElement>;
+
   private fb = new FormBuilder();
   private auth = inject(AuthService);
   private router = inject(Router);
   themeService = inject(ThemeService);
 
-  /** First source = local (public/videos/welcome-bg.mp4); second = Pexels backup for when repo has no video. */
-  readonly welcomeVideoBackupUrl = WELCOME_VIDEO_BACKUP_URL;
   readonly pexelsVideoCreditUrl = PEXELS_VIDEO_PAGE_URL;
 
   showRegister = false;
   error: string | null = null;
+
+  ngAfterViewInit(): void {
+    setTimeout(() => this.startVideo(), 0);
+  }
+
+  private startVideo(): void {
+    const video = this.videoRef?.nativeElement;
+    if (!video) return;
+
+    const tryPlay = () => video.play().catch(() => {});
+    const tryPrimary = () => {
+      video.src = WELCOME_VIDEO_FALLBACK;
+      video.load();
+    };
+    const tryBackup = () => {
+      video.src = WELCOME_VIDEO_PEXELS;
+      video.load();
+    };
+
+    video.muted = true;
+    video.playsInline = true;
+    video.loop = true;
+    video.preload = 'auto';
+    video.addEventListener('canplay', tryPlay, { once: true });
+    const onError = () => {
+      video.removeEventListener('canplay', tryPlay);
+      tryBackup();
+      video.addEventListener('canplay', tryPlay, { once: true });
+    };
+    video.addEventListener('error', onError, { once: true });
+
+    tryPrimary();
+  }
   loading = false;
 
   loginForm = this.fb.nonNullable.group({

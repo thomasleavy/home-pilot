@@ -44,24 +44,24 @@
   pointer-events: none;
 }
 
-/* Slightly transparent so video shows through; theme-aware */
+/* Same theme colours as login/register card, with reduced opacity so video shows through */
 .welcome-hero-card {
   max-width: 420px;
   padding: 1.75rem 2rem;
   border-radius: 16px;
   text-align: center;
   pointer-events: auto;
-  background: rgba(248, 250, 252, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.20);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
-html.theme-dark .welcome-hero-card {
-  background: rgba(30, 41, 59, 0.82);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+:host-context(html.theme-dark) .welcome-hero-card {
+  background: rgba(30, 41, 59, 0.20);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .welcome-hero-card .app-name {

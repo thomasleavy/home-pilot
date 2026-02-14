@@ -1,9 +1,6 @@
 <div class="welcome-page">
   <section class="welcome-video-section" aria-hidden="true">
-    <video class="welcome-video" autoplay muted loop playsinline>
-      <source src="/videos/welcome-bg.mp4" type="video/mp4" />
-      <source [src]="welcomeVideoBackupUrl" type="video/mp4" />
-    </video>
+    <video #welcomeVideo class="welcome-video" muted loop playsinline preload="auto" autoplay></video>
     <div class="welcome-video-overlay"></div>
     <div class="welcome-hero-container">
       <div class="welcome-hero-card">

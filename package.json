@@ -1,0 +1,8 @@
+{
+  "name": "home-pilot",
+  "private": true,
+  "description": "Smart-home control app (Angular + Node.js + MQTT)",
+  "scripts": {
+    "deploy": "cd frontend && npm run build:gh-pages && cd .. && node -e \"require('fs').copyFileSync('frontend/dist/frontend/browser/index.html', 'frontend/dist/frontend/browser/404.html')\" && npx gh-pages -d frontend/dist/frontend/browser"
+  }
+}
