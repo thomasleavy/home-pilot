@@ -5,11 +5,13 @@
   flex-direction: column;
 }
 
-/* Full-bleed background video section */
+/* Video + hero section: in document flow so form always sits below, no overlap */
 .welcome-video-section {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
+  position: relative;
+  width: 100%;
+  min-height: clamp(280px, 50vh, 420px);
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .welcome-video {
@@ -32,14 +34,9 @@
   pointer-events: none;
 }
 
-/* Hero in upper half only so form below never overlaps it */
 .welcome-hero-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50vh;
-  min-height: 200px;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,7 +125,7 @@ html.theme-dark .welcome-theme-toggle .theme-option:hover {
   color: var(--accent-blue);
 }
 
-/* Form content: sits in lower half, never overlaps hero */
+/* Form content: always below hero in flow, never overlaps */
 .welcome-content {
   position: relative;
   z-index: 1;
@@ -136,11 +133,10 @@ html.theme-dark .welcome-theme-toggle .theme-option:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 1.5rem 1.25rem 2rem;
-  min-height: 100vh;
+  min-height: 0;
   box-sizing: border-box;
-  /* No background so video shows through; form card provides its own background */
 }
 
 .welcome-content .error-banner {
