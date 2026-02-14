@@ -44,16 +44,24 @@
   pointer-events: none;
 }
 
-/* Same theming as login/register container (var(--bg-card), etc.) */
+/* Slightly transparent so video shows through; theme-aware */
 .welcome-hero-card {
   max-width: 420px;
   padding: 1.75rem 2rem;
   border-radius: 16px;
   text-align: center;
   pointer-events: auto;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  background: rgba(248, 250, 252, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+html.theme-dark .welcome-hero-card {
+  background: rgba(30, 41, 59, 0.82);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .welcome-hero-card .app-name {
@@ -75,6 +83,22 @@
   color: var(--text-secondary);
   line-height: 1.5;
   margin: 0;
+}
+
+.welcome-video-credit {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.9;
+}
+
+.welcome-video-credit a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
+.welcome-video-credit a:hover {
+  color: var(--text-primary);
 }
 
 /* Theme toggle: top-right over video */

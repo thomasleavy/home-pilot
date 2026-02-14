@@ -7,6 +7,8 @@ import { ThemeService } from '../../core/services/theme.service';
 
 /** Local video: put a file at public/videos/welcome-bg.mp4. Backup URL used when local file is not present (e.g. on GitHub). */
 const WELCOME_VIDEO_BACKUP_URL = 'https://videos.pexels.com/video-files/6962711/6962711-hd_1920_1080_25fps.mp4';
+/** Pexels video ID 6962711 – credit link for the welcome background video. */
+const PEXELS_VIDEO_PAGE_URL = 'https://www.pexels.com/video/6962711/';
 
 @Component({
   selector: 'app-welcome',
@@ -23,6 +25,7 @@ export class WelcomeComponent {
 
   /** First source = local (public/videos/welcome-bg.mp4); second = Pexels backup for when repo has no video. */
   readonly welcomeVideoBackupUrl = WELCOME_VIDEO_BACKUP_URL;
+  readonly pexelsVideoCreditUrl = PEXELS_VIDEO_PAGE_URL;
 
   showRegister = false;
   error: string | null = null;
