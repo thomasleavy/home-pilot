@@ -85,6 +85,16 @@
   margin: 0;
 }
 
+/* Light mode: darker text on transparent card for readability */
+:host-context(html:not(.theme-dark)) .welcome-hero-card .app-tagline,
+:host-context(html:not(.theme-dark)) .welcome-hero-card .app-blurb {
+  color: #ffffff;
+}
+
+:host-context(html:not(.theme-dark)) .welcome-hero-card .welcome-video-credit {
+  color: #475569;
+}
+
 .welcome-video-credit {
   margin: 1rem 0 0;
   font-size: 0.75rem;
