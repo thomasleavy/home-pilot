@@ -1,6 +1,6 @@
 # Home Pilot
 
-This is a smart-home control app. Control heating, hot water, lights and view usage insights from one place. The frontend talks to a Node.js backend, which bridges your devices (via MQTT) and the web.
+This is a smart-home control <strong>mobile first</strong> app. Control heating, hot water, lights and view usage insights from one place. The frontend talks to a Node.js backend, which bridges your devices (via MQTT) and the web.
 
 **Why it’s useful:** One dashboard for thermostat, hot water, lights and sensors; per-account settings and insights; works with a local MQTT broker and optional simulated devices.
 
